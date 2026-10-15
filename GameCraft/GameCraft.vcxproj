@@ -124,10 +124,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="App.cpp" />
+    <ClCompile Include="GameInput.cpp" />
+    <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="GameTime.cpp" />
+    <ClCompile Include="GraphicEngine.cpp" />
     <ClCompile Include="_main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="App.h" />
+    <ClInclude Include="GameInput.h" />
+    <ClInclude Include="GameScene.h" />
+    <ClInclude Include="GameTime.h" />
+    <ClInclude Include="GraphicEngine.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
