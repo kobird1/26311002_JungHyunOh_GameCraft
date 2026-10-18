@@ -23,6 +23,9 @@ int App::Init()
 	// GameTime 초기화
 	m_gameTime.Init();
 
+	// 폰트 파일 로드
+	//g2_FontRegisterFile(파일 경로);
+
 	// Input 초기화
 	m_pGameInput = new GameInput;
 	if (0 > m_pGameInput->Init())
@@ -67,6 +70,7 @@ int App::Update()
 int App::Render()
 {
 	// GameScene 렌더링
+	m_pGameScene->Render();
 
 	return 0;
 }

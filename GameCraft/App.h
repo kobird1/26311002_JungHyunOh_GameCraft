@@ -3,7 +3,7 @@
 #include "GameTime.h"
 #include "GraphicEngine.h"
 
-class GameInput;
+class GameInput;  //전방 선언 해도 인클루드 해야하는데 왜함?
 class GameScene;
 
 class App
