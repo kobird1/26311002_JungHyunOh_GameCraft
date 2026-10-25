@@ -1,9 +1,11 @@
 #pragma once
 
+#include <vector>
 #include "GameTime.h"
 #include "GraphicEngine.h"
+#include "GameScene.h"
 
-class GameInput;  //전방 선언 해도 인클루드 해야하는데 왜함?
+class GameInput;
 class GameScene;
 
 class App
@@ -16,13 +18,16 @@ public:
 	void Destroy();
 	int  Update();
 	int  Render();
-	int Run();
+	int  Run();
+
+public:
+	void ChangeScene(GAME_PHASE nextScene);
 
 protected:
 	GraphicEngine::GAME_WINDOW m_gameWin
 	{
 		120, 50
-		, 960, 600
+		, 1280, 640
 		, "GameTitle"
 		, true
 		, 1.0f
@@ -30,7 +35,12 @@ protected:
 	GraphicEngine m_graphicEngine{};
 	GameTime   m_gameTime   {};
 	GameInput* m_pGameInput {};
-	GameScene* m_pGameScene {};
+
+	std::vector<GameScene*> m_sceneList;
+	GameScene* m_pGameScene		{};
+	bool       m_sceneChanged	{};
+	GAME_PHASE m_sceneCurrent	{ SCENE_BEGIN };
+	GAME_PHASE m_sceneNext		{};
 };
 
 extern App* g_pApp;

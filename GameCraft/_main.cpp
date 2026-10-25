@@ -2,17 +2,14 @@
 #include "App.h"
 using namespace std;
 
-App* g_pApp;
-
 int main()
 {
 	App app;
-	g_pApp = &app;
 
-	if (0 > g_pApp->Init())
+	if (0 > app.Init())
 		return 0;
 
-	auto r = g_pApp->Run();
+	auto r = app.Run();
 	{
 
 	}

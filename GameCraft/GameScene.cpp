@@ -1,6 +1,11 @@
 #include "GameScene.h"
 #include "glc2d.h"
 
+GameScene::GameScene()
+{
+	m_message = "Game Scene";
+}
+
 int GameScene::Init()
 {
 	m_font1 = g2_FontCreate("±º∏≤√º", 32);
@@ -14,6 +19,10 @@ int GameScene::Update()
 
 int GameScene::Render()
 {
-	g2_FontDrawText(m_font1, { 200, 100 }, 0xFFFF00FF, "æ»≥Á«œººø‰");
+	g2_FontDrawText(m_font1, { 10, 10 }, 0xFFFF00FF, m_message.c_str());
+	return 0;
+}
+int GameScene::Destroy()
+{
 	return 0;
 }

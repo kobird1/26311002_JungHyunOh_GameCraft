@@ -33,19 +33,16 @@
     <ClCompile Include="GraphicEngine.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="GameCharacter.cpp">
+    <ClCompile Include="SceneBegin.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="GameNpc.cpp">
+    <ClCompile Include="SceneLobby.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="GameMob.cpp">
+    <ClCompile Include="ScenePlay.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="GameBossMob.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlayer.cpp">
+    <ClCompile Include="ScenePlayResult.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,19 +65,16 @@
     <ClInclude Include="GraphicEngine.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="GameCharacter.h">
+    <ClInclude Include="SceneBegin.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="GameNpc.h">
+    <ClInclude Include="SceneLobby.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="GameMob.h">
+    <ClInclude Include="ScenePlay.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="GameBossMob.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlayer.h">
+    <ClInclude Include="ScenePlayResult.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
