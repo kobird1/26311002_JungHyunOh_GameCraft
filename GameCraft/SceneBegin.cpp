@@ -7,13 +7,26 @@ SceneBegin::SceneBegin()
 	m_message = "SceneBegin";
 }
 
+int SceneBegin::Init()
+{
+	player.Init();
+	return 0;
+}
+
 int SceneBegin::Update()
 {
+	player.Update();
 	auto keyEvent = GetGameInput()->GetKeyState(VK_RIGHT);
 	if (EInput::EINPUT_DOWN == keyEvent)
 	{
 		g_pApp->ChangeScene(GAME_PHASE::SCENE_LOBBY);
 	}
 
+	return 0;
+}
+
+int SceneBegin::Render()
+{
+	player.Render();
 	return 0;
 }

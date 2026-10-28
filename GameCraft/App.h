@@ -22,11 +22,12 @@ public:
 
 public:
 	void ChangeScene(GAME_PHASE nextScene);
+	long long GetDeltaTime() const;
 
 protected:
 	GraphicEngine::GAME_WINDOW m_gameWin
 	{
-		120, 50
+		50, 50
 		, 1280, 640
 		, "GameTitle"
 		, true
@@ -44,4 +45,3 @@ protected:
 };
 
 extern App* g_pApp;
-

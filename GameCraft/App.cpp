@@ -73,7 +73,7 @@ int App::Update()
 
 		m_sceneChanged = false;
 		m_sceneCurrent = m_sceneNext;
-		m_pGameScene = m_sceneList[m_sceneCurrent];
+		m_pGameScene   = m_sceneList[m_sceneCurrent];
 
 		m_pGameScene->Init();
 	}
@@ -116,4 +116,9 @@ void App::ChangeScene(GAME_PHASE nextScene)
 {
 	m_sceneChanged = true;
 	m_sceneNext = nextScene;
+}
+
+long long App::GetDeltaTime() const
+{
+	return m_gameTime.deltaTime;
 }
