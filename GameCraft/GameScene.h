@@ -16,6 +16,7 @@ class GameScene
 {
 public:
 	GameScene();
+	virtual ~GameScene() = default;
 
 	virtual int Init();
 	virtual int Update();

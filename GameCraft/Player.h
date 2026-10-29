@@ -1,29 +1,24 @@
 #pragma once
 
 #include "Character.h"
-
-struct Animation
-{
-	int startFrame;
-	int frameCount;
-	long long interval;
-};
+#include "Weapon.h"
+#include <memory>
 
 class Player : public Character
 {
 public:
-	int Init() override;
+	int  Init() override;
 	void Destroy() override;
-	int Update() override;
-	int Render() override;
+	int  Update() override;
+	int  Render() override;
 
-	void SetAnimation(const Animation& flipbook);
 protected:
-	int  m_txPlayer	{ -1 };
-	RECT src		{};
+	Animator	m_Animator	  {};
+	Animation	m_FIdleFlipbook{ 0, 4, 200 };
+	Animation	m_LIdleFlipbook{ 4, 4, 200 };
+	Animation	m_RIdleFlipbook{ 8, 4, 200 };
+	Animation	m_BIdleFlipbook{ 12, 4, 200 };
 
-	long long m_AnimElapsed {};
-	int		  m_AnimIndex	{};
-	Animation m_Flipbook	{ 0, 4, 200 };
+	std::unique_ptr<Weapon> m_Weapon{};
 };
 

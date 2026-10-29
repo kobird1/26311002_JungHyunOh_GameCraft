@@ -124,6 +124,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animator.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="GameInput.cpp" />
@@ -136,12 +137,14 @@
     <ClCompile Include="SceneLobby.cpp" />
     <ClCompile Include="ScenePlay.cpp" />
     <ClCompile Include="ScenePlayResult.cpp" />
+    <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="_main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animator.h" />
     <ClInclude Include="App.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="GameInput.h" />
@@ -154,6 +157,7 @@
     <ClInclude Include="SceneLobby.h" />
     <ClInclude Include="ScenePlay.h" />
     <ClInclude Include="ScenePlayResult.h" />
+    <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

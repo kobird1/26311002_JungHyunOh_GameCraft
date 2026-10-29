@@ -4,7 +4,13 @@
 
 int Player::Init()
 {
-    m_txPlayer = g2_TextureLoad("resource/texture/Player.png");
+    m_Animator.Init("resource/texture/Player.png", 24, 24);
+    m_Transform.position = { 550, 250 };
+    m_Transform.scale    = { 3, 3 };
+    m_MoveSpeed          = 2;
+
+    m_Animator.SetAnimation(m_LIdleFlipbook);
+    m_Weapon = std::make_unique<Weapon>(m_Transform);
 
     return 0;
 }
@@ -16,42 +22,48 @@ void Player::Destroy()
 
 int Player::Update()
 {
-    m_AnimElapsed += g_pApp->GetDeltaTime();
-    if (m_AnimElapsed >= m_Flipbook.interval)
+    m_Animator.Update(g_pApp->GetDeltaTime());
+
+    VEC2 moveDir{ 0.0f, 0.0f };
+    auto keyEvent = GetGameInput()->GetKeyState('W');
+    if (EInput::EINPUT_PRESS == keyEvent)
     {
-        m_AnimElapsed -= m_Flipbook.interval;
-        m_AnimIndex = (m_AnimIndex + 1) % m_Flipbook.frameCount;
+        moveDir.y -= 1.0f;
+        //SetAnimation({ 34, 6, 200 });
     }
 
-    const int currFrame = (m_Flipbook.startFrame + m_AnimIndex) * 24;
-    src = { currFrame, 0, currFrame + 24, 24 };
-
-    auto keyEvent = GetGameInput()->GetKeyState('A');
-    if (EInput::EINPUT_DOWN == keyEvent)
+    keyEvent = GetGameInput()->GetKeyState('A');
+    if (EInput::EINPUT_PRESS == keyEvent)
     {
-        SetAnimation({ 22, 6, 200 });
+        moveDir.x -= 1.0f;
+        //SetAnimation({ 22, 6, 200 });
     }
+
+    keyEvent = GetGameInput()->GetKeyState('S');
+    if (EInput::EINPUT_PRESS == keyEvent)
+    {
+        moveDir.y += 1.0f;
+        //SetAnimation({ 16, 6, 200 });
+    }
+
+    keyEvent = GetGameInput()->GetKeyState('D');
+    if (EInput::EINPUT_PRESS == keyEvent)
+    {
+        moveDir.x += 1.0f;
+        //SetAnimation({ 28, 6, 200 });
+    }
+
+    Move(moveDir);
+    
+    m_Weapon->Update();
 
     return 0;
 }
 
 int Player::Render()
 {
-    m_Transform.position = { 550, 250 };
-    m_Transform.scale    = { 3, 3 };
-    g2_Draw2D(m_txPlayer, &src, &m_Transform.position, &m_Transform.scale);
+    m_Animator.Render(m_Transform);
+    m_Weapon->Render();
 
     return 0;
-}
-
-void Player::SetAnimation(const Animation& flipbook)
-{
-    if (flipbook.startFrame < 0 || flipbook.frameCount <= 0 || flipbook.interval <= 0)
-    {
-        return;
-    }
-
-    m_Flipbook    = flipbook;
-    m_AnimIndex   = 0;
-    m_AnimElapsed = 0;
 }
