@@ -12,6 +12,8 @@ struct Animation
 	int			frameCount;
 	long long	interval;
 	int			row{ 0 };
+
+	bool operator==(const Animation& other) const;
 };
 
 class Animator

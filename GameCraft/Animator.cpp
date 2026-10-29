@@ -41,11 +41,20 @@ int Animator::Render(const Transform& transform)
 void Animator::SetAnimation(const Animation& flipbook)
 {
     if (flipbook.startFrame < 0 || flipbook.frameCount <= 0 || flipbook.interval <= 0)
-    {
         return;
-    }
+
+    if (m_Flipbook == flipbook)
+        return;
 
     m_Flipbook    = flipbook;
     m_AnimIndex   = 0;
     m_AnimElapsed = 0;
+}
+
+bool Animation::operator==(const Animation& other) const
+{
+    return startFrame == other.startFrame &&
+           frameCount == other.frameCount &&
+           interval == other.interval &&
+           row == other.row;
 }
