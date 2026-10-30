@@ -4,9 +4,11 @@
 
 struct Transform
 {
-	VEC2 position;
-	VEC2 scale;
-	float rotation;
+	VEC2  position { 0.0f, 0.0f };
+	VEC2  scale	   { 1.0f, 1.0f };
+	float rotation {};
+
+	VEC2 GetCenter(int width, int height) const;
 };
 
 class GameObject

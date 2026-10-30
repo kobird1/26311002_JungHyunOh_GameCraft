@@ -31,7 +31,7 @@ protected:
 	long long	m_AnimElapsed {};
 	int			m_AnimIndex   {};
 	Animation	m_Flipbook    {};
-	RECT		src			  {};
+	RECT		m_Frame		  {};
 
 	int			m_FrameWidth  {};
 	int			m_FrameHeight {};

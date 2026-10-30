@@ -24,16 +24,17 @@ int Animator::Update(long long animElapsed)
     }
 
     const int left = (m_Flipbook.startFrame + m_AnimIndex) * m_FrameWidth;
-    const int top  = m_Flipbook.row * m_FrameHeight;
+    const int top  =  m_Flipbook.row * m_FrameHeight;
 
-    src = { left, top, left + m_FrameWidth, top + m_FrameHeight };
+    m_Frame = { left, top, left + m_FrameWidth, top + m_FrameHeight };
 
     return 0;
 }
 
 int Animator::Render(const Transform& transform)
 {
-    g2_Draw2D(m_Texture, &src, &transform.position, &transform.scale);
+    VEC2 center = transform.GetCenter(m_FrameWidth, m_FrameHeight);
+    g2_Draw2D(m_Texture, &m_Frame, &center, &transform.scale, &transform.position, transform.rotation);
 
     return 0;
 }
@@ -55,6 +56,6 @@ bool Animation::operator==(const Animation& other) const
 {
     return startFrame == other.startFrame &&
            frameCount == other.frameCount &&
-           interval == other.interval &&
-           row == other.row;
+           interval   == other.interval   &&
+           row        == other.row;
 }

@@ -6,7 +6,7 @@ void Character::TakeDamage(int damage)
 
 }
 
-void Character::Move(const VEC2& moveDirection)
+void Character::Move(const VEC2& moveDirection, long long deltaTime)
 {
 	float length = std::sqrt(moveDirection.x * moveDirection.x + moveDirection.y * moveDirection.y);
 
@@ -16,6 +16,6 @@ void Character::Move(const VEC2& moveDirection)
 	float dirX = moveDirection.x / length;
 	float dirY = moveDirection.y / length;
 
-	m_Transform.position.x += dirX * m_MoveSpeed;
-	m_Transform.position.y += dirY * m_MoveSpeed;
+	m_Transform.position.x += dirX * m_MoveSpeed * deltaTime * 0.001f;
+	m_Transform.position.y += dirY * m_MoveSpeed * deltaTime * 0.001f;
 }

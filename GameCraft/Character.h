@@ -9,15 +9,15 @@ public:
 	void TakeDamage(int damage);
 	//virtual void Attack() = 0;
 
-	void Move(const VEC2& moveDirection);
+	void Move(const VEC2& moveDirection, long long deltaTime);
 
 protected:
-	int m_Hp	{};
-	int m_MaxHp	{};
-	int m_Damage{};
+	int  m_Hp	     {};
+	int  m_MaxHp	 {};
+	int  m_Damage	 {};
 
-	RECT m_Collider{};
+	RECT m_Collider  {};
 
-	int m_MoveSpeed{};
+	int  m_MoveSpeed {};
 };
 

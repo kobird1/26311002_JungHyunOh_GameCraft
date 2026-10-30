@@ -7,12 +7,11 @@ int Player::Init()
     m_Animator.Init("resource/texture/Player.png", m_Width, m_Height);
     m_Transform.position = { 550, 250 };
     m_Transform.scale    = { 3, 3 };
-    m_MoveSpeed          = 2;
-    m_Center             = GetCenter(m_Width, m_Height);
+    m_MoveSpeed          = 120;
 
-    m_Flipbooks.push_back(Animation{ 0, 4, 200 });                  //정면   + 대기
-    m_Flipbooks.push_back(Animation{ 4, 4, 200 });                  //왼쪽   + 대기
-    m_Flipbooks.push_back(Animation{ 8, 4, 200 });                  //오른쪽 + 대기
+    m_Flipbooks.push_back(Animation{ 0,  4, 200 });                 //정면   + 대기
+    m_Flipbooks.push_back(Animation{ 4,  4, 200 });                 //왼쪽   + 대기
+    m_Flipbooks.push_back(Animation{ 8,  4, 200 });                 //오른쪽 + 대기
     m_Flipbooks.push_back(Animation{ 12, 4, 200 });                 //뒷면   + 대기
     m_Flipbooks.push_back(Animation{ 16, 6, 200 });                 //정면   + 걷기
     m_Flipbooks.push_back(Animation{ 22, 6, 200 });                 //왼쪽   + 걷기
@@ -20,7 +19,9 @@ int Player::Init()
     m_Flipbooks.push_back(Animation{ 34, 6, 200 });                 //뒷면   + 걷기
 
     m_Animator.SetAnimation(m_Flipbooks[m_State + m_Direction]);
-    m_Weapon = std::make_unique<Weapon>(m_Center);
+
+    m_MousePos = GetGameInput()->MousePosition();
+    m_Weapon   = std::make_unique<Weapon>(m_Transform.position, m_MousePos);
 
     return 0;
 }
@@ -32,7 +33,7 @@ void Player::Destroy()
 
 int Player::Update()
 {
-    m_Animator.Update(g_pApp->GetDeltaTime());
+    long long deltaTime = g_pApp->GetDeltaTime();
 
     VEC2 moveDir{ 0.0f, 0.0f };
     auto keyEvent = GetGameInput()->GetKeyState('W');
@@ -57,13 +58,11 @@ int Player::Update()
     else
         m_State = State::IDLE;
 
-    Move(moveDir);
+    Move(moveDir, deltaTime);
     
-    VEC3i mousePos = GetGameInput()->MousePosition();
-
-    m_Center = GetCenter(m_Width, m_Height);
-    int dx = mousePos.x - m_Center.x;
-    int dy = mousePos.y - m_Center.y;
+    m_MousePos = GetGameInput()->MousePosition();
+    float dx   = m_MousePos.x - m_Transform.position.x;
+    float dy   = m_MousePos.y - m_Transform.position.y;
 
     if (dx != 0.0f || dy != 0.0f)
     {
@@ -75,6 +74,7 @@ int Player::Update()
 
 
     m_Animator.SetAnimation(m_Flipbooks[m_State + m_Direction]);
+    m_Animator.Update(deltaTime);
 
     m_Weapon->Update();
 
@@ -92,13 +92,4 @@ int Player::Render()
         m_Weapon->Render();
 
     return 0;
-}
-
-const VEC2 Player::GetCenter(int width, int height)
-{
-    VEC2 center{};
-    center.x = m_Transform.position.x + width  * m_Transform.scale.x * 0.5f;
-    center.y = m_Transform.position.y + height * m_Transform.scale.y * 0.5f;
-
-    return center;
 }
