@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "App.h"
 #include "GameInput.h"
+#include <cmath>
 
 int Player::Init()
 {
@@ -26,9 +27,9 @@ int Player::Init()
     return 0;
 }
 
-void Player::Destroy()
+int Player::Destroy()
 {
-
+    return 0;
 }
 
 int Player::Update()

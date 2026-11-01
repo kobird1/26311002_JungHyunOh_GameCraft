@@ -24,10 +24,10 @@ enum Direction
 class Player : public Character
 {
 public:
-	int  Init() override;
-	void Destroy() override;
-	int  Update() override;
-	int  Render() override;
+	int Init() override;
+	int Destroy() override;
+	int Update() override;
+	int Render() override;
 
 protected:
 	Animator				m_Animator	{};

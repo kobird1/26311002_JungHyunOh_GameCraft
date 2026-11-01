@@ -47,9 +47,11 @@ int GraphicEngine::Init(const GAME_WINDOW& gameWindow)
 	return 0;
 }
 
-void GraphicEngine::Destroy()
+int GraphicEngine::Destroy()
 {
 	g2_DestroyWin();
+
+	return 0;
 }
 
 

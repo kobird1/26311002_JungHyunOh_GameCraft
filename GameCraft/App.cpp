@@ -31,7 +31,8 @@ int App::Init()
 	// Glc2d 초기화
 	if (0 > m_graphicEngine.Init(m_gameWin))
 		return -1;
-	m_graphicEngine.SetColor(0xFF006699);
+
+	m_graphicEngine.SetColor(0xFF303030);
 
 
 	// GameTime 초기화
@@ -56,13 +57,15 @@ int App::Init()
 	return 0;
 }
 
-void App::Destroy()
+int App::Destroy()
 {
 	if (m_pGameInput)
 		delete m_pGameInput; m_pGameInput = nullptr;
 
 	if(m_pGameScene)
 		delete m_pGameScene; m_pGameScene = nullptr;
+
+	return 0;
 }
 
 int App::Update()
@@ -109,13 +112,14 @@ int App::Run()
 	m_graphicEngine.Run();
 
 	this->Destroy();
+
 	return 0;
 }
 
 void App::ChangeScene(GAME_PHASE nextScene)
 {
 	m_sceneChanged = true;
-	m_sceneNext = nextScene;
+	m_sceneNext    = nextScene;
 }
 
 long long App::GetDeltaTime() const

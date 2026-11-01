@@ -9,9 +9,9 @@ int Animator::Init(string fileName, int frameWidth, int frameHeight)
     return 0;
 }
 
-void Animator::Destroy()
+int Animator::Destroy()
 {
-
+    return 0;
 }
 
 int Animator::Update(long long animElapsed)
@@ -33,7 +33,7 @@ int Animator::Update(long long animElapsed)
 
 int Animator::Render(const Transform& transform)
 {
-    VEC2 center = transform.GetCenter(m_FrameWidth, m_FrameHeight);
+    VEC2 center = transform.GetDrawPosition(m_FrameWidth, m_FrameHeight);
     g2_Draw2D(m_Texture, &m_Frame, &center, &transform.scale, &transform.position, transform.rotation);
 
     return 0;
