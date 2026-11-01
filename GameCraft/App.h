@@ -14,34 +14,34 @@ public:
 	App();
 	virtual ~App();
 
-	int  Init();
-	void Destroy();
-	int  Update();
-	int  Render();
-	int  Run();
+	int Init();
+	int Destroy();
+	int Update();
+	int Render();
+	int Run();
 
 public:
-	void ChangeScene(GAME_PHASE nextScene);
+	void	  ChangeScene(GAME_PHASE nextScene);
 	long long GetDeltaTime() const;
 
 protected:
-	GraphicEngine::GAME_WINDOW m_gameWin
+	GraphicEngine::GAME_WINDOW  m_gameWin
 	{
 		50, 50
-		, 1280, 640
+		, 1280, 720
 		, "GameTitle"
 		, true
 		, 1.0f
 	};
-	GraphicEngine m_graphicEngine{};
-	GameTime   m_gameTime   {};
-	GameInput* m_pGameInput {};
+	GraphicEngine			m_graphicEngine {};
+	GameTime				m_gameTime      {};
+	GameInput*				m_pGameInput    {};
 
-	std::vector<GameScene*> m_sceneList;
-	GameScene* m_pGameScene		{};
-	bool       m_sceneChanged	{};
-	GAME_PHASE m_sceneCurrent	{ SCENE_BEGIN };
-	GAME_PHASE m_sceneNext		{};
+	std::vector<GameScene*>	m_sceneList;
+	GameScene*				m_pGameScene	{};
+	bool					m_sceneChanged	{};
+	GAME_PHASE				m_sceneCurrent	{ SCENE_BEGIN };
+	GAME_PHASE				m_sceneNext		{};
 };
 
 extern App* g_pApp;

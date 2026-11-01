@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "App.h"
 #include "GameInput.h"
+#include <cmath>
 
 int Player::Init()
 {
@@ -9,14 +10,14 @@ int Player::Init()
     m_Transform.scale    = { 3, 3 };
     m_MoveSpeed          = 120;
 
-    m_Flipbooks.push_back(Animation{ 0,  4, 200 });                 //Á¤¸é   + ´ë±â
-    m_Flipbooks.push_back(Animation{ 4,  4, 200 });                 //¿ÞÂÊ   + ´ë±â
-    m_Flipbooks.push_back(Animation{ 8,  4, 200 });                 //¿À¸¥ÂÊ + ´ë±â
-    m_Flipbooks.push_back(Animation{ 12, 4, 200 });                 //µÞ¸é   + ´ë±â
-    m_Flipbooks.push_back(Animation{ 16, 6, 200 });                 //Á¤¸é   + °È±â
-    m_Flipbooks.push_back(Animation{ 22, 6, 200 });                 //¿ÞÂÊ   + °È±â
-    m_Flipbooks.push_back(Animation{ 28, 6, 200 });                 //¿À¸¥ÂÊ + °È±â
-    m_Flipbooks.push_back(Animation{ 34, 6, 200 });                 //µÞ¸é   + °È±â
+    m_Flipbooks.push_back(Animation{ 0,  4, 200 });                 //´ë±â + Á¤¸é
+    m_Flipbooks.push_back(Animation{ 4,  4, 200 });                 //´ë±â + ¿ÞÂÊ
+    m_Flipbooks.push_back(Animation{ 8,  4, 200 });                 //´ë±â + ¿À¸¥ÂÊ
+    m_Flipbooks.push_back(Animation{ 12, 4, 200 });                 //´ë±â + µÞ¸é
+    m_Flipbooks.push_back(Animation{ 16, 6, 200 });                 //°È±â + Á¤¸é
+    m_Flipbooks.push_back(Animation{ 22, 6, 200 });                 //°È±â + ¿ÞÂÊ
+    m_Flipbooks.push_back(Animation{ 28, 6, 200 });                 //°È±â + ¿À¸¥ÂÊ
+    m_Flipbooks.push_back(Animation{ 34, 6, 200 });                 //°È±â + µÞ¸é
 
     m_Animator.SetAnimation(m_Flipbooks[m_State + m_Direction]);
 
@@ -26,9 +27,9 @@ int Player::Init()
     return 0;
 }
 
-void Player::Destroy()
+int Player::Destroy()
 {
-
+    return 0;
 }
 
 int Player::Update()
@@ -71,7 +72,6 @@ int Player::Update()
         else
             m_Direction = (dy > 0.0f) ? Direction::FRONT : Direction::BACK;
     }
-
 
     m_Animator.SetAnimation(m_Flipbooks[m_State + m_Direction]);
     m_Animator.Update(deltaTime);

@@ -20,17 +20,17 @@ int Weapon::Init()
 	return 0;
 }
 
-void Weapon::Destroy()
+int Weapon::Destroy()
 {
-
+	return 0;
 }
 
 int Weapon::Update()
 {
-	float angle = atan2(m_MousePos.y - m_ParentPivot.y, m_MousePos.x - m_ParentPivot.x);
+	float angle = std::atan2(m_MousePos.y - m_ParentPivot.y, m_MousePos.x - m_ParentPivot.x);
 
-	m_Transform.position.x = m_ParentPivot.x + cos(angle) * 1;
-	m_Transform.position.y = m_ParentPivot.y + sin(angle) * 1;
+	m_Transform.position.x = m_ParentPivot.x + std::cos(angle) * 1;
+	m_Transform.position.y = m_ParentPivot.y + std::sin(angle) * 1;
 
 	m_Transform.rotation = (angle - 3.14159265f * 0.5f) * -1;
 
