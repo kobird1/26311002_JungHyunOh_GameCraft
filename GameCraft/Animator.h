@@ -11,7 +11,8 @@ struct Animation
 	int		  startFrame;
 	int		  frameCount;
 	long long interval;
-	int		  row { 0 };
+	bool      rooping { true };
+	int		  row     { 0 };
 
 	bool operator==(const Animation& other) const;
 };
@@ -19,12 +20,15 @@ struct Animation
 class Animator
 {
 public:
+	~Animator();
+
 	int Init(string fileName, int frameWidth, int frameHeight);
 	int Destroy();
 	int Update(long long animElapsed);
-	int Render(const Transform& transform);
+	int Render(const Transform& transform, const VEC2& viewOffset);
 
 	void SetAnimation(const Animation& flipbook);
+	bool IsFinished() const;
 
 protected:
 	int		  m_Texture	    { -1 };

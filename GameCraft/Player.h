@@ -3,14 +3,12 @@
 #include "Character.h"
 #include "Weapon.h"
 #include <memory>
-#include <vector>
-
-using std::vector;
 
 enum State
 {
 	IDLE = 0,
 	WALK = 4,
+	DEAD = 8,
 };
 
 enum Direction
@@ -27,11 +25,15 @@ public:
 	int Init() override;
 	int Destroy() override;
 	int Update() override;
-	int Render() override;
+	int Render(const VEC2& viewOffset) override;
+
+	Weapon* GetWeapon();
 
 protected:
-	Animator				m_Animator	{};
-	vector<Animation>		m_Flipbooks {};
+	void Movement(long long deltaTime);
+	void Attack(Character* other) override;
+
+protected:
 	State					m_State		{ IDLE };
 	Direction				m_Direction	{ FRONT };
 

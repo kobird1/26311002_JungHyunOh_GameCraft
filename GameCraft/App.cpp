@@ -62,7 +62,7 @@ int App::Destroy()
 	if (m_pGameInput)
 		delete m_pGameInput; m_pGameInput = nullptr;
 
-	if(m_pGameScene)
+	if (m_pGameScene)
 		delete m_pGameScene; m_pGameScene = nullptr;
 
 	return 0;

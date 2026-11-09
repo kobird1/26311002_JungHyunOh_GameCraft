@@ -1,4 +1,10 @@
 #include "Animator.h"
+#include <cmath>
+
+Animator::~Animator()
+{
+    Destroy();
+}
 
 int Animator::Init(string fileName, int frameWidth, int frameHeight)
 {
@@ -11,6 +17,8 @@ int Animator::Init(string fileName, int frameWidth, int frameHeight)
 
 int Animator::Destroy()
 {
+    g2_TextureRelease(m_Texture);
+
     return 0;
 }
 
@@ -20,9 +28,12 @@ int Animator::Update(long long animElapsed)
     if (m_AnimElapsed >= m_Flipbook.interval)
     {
         m_AnimElapsed -= m_Flipbook.interval;
-        m_AnimIndex    = (m_AnimIndex + 1) % m_Flipbook.frameCount;
+
+        if (m_Flipbook.rooping || m_AnimIndex < m_Flipbook.frameCount - 1)
+            m_AnimIndex = (m_AnimIndex + 1) % m_Flipbook.frameCount;
     }
 
+    
     const int left = (m_Flipbook.startFrame + m_AnimIndex) * m_FrameWidth;
     const int top  =  m_Flipbook.row * m_FrameHeight;
 
@@ -31,10 +42,15 @@ int Animator::Update(long long animElapsed)
     return 0;
 }
 
-int Animator::Render(const Transform& transform)
+int Animator::Render(const Transform& transform, const VEC2& viewOffset)
 {
-    VEC2 center = transform.GetDrawPosition(m_FrameWidth, m_FrameHeight);
-    g2_Draw2D(m_Texture, &m_Frame, &center, &transform.scale, &transform.position, transform.rotation);
+    VEC2 screenPosition { transform.position.x + viewOffset.x
+                        , transform.position.y + viewOffset.y };
+
+    VEC2 center { screenPosition.x - m_FrameWidth  * std::abs(transform.scale.x) * 0.5f
+                , screenPosition.y - m_FrameHeight * std::abs(transform.scale.y) * 0.5f };
+
+    g2_Draw2D(m_Texture, &m_Frame, &center, &transform.scale, &screenPosition, transform.rotation);
 
     return 0;
 }
@@ -50,6 +66,11 @@ void Animator::SetAnimation(const Animation& flipbook)
     m_Flipbook    = flipbook;
     m_AnimIndex   = 0;
     m_AnimElapsed = 0;
+}
+
+bool Animator::IsFinished() const
+{
+    return m_AnimIndex == m_Flipbook.frameCount - 1;
 }
 
 bool Animation::operator==(const Animation& other) const
